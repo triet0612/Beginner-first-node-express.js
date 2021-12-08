@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <a href="/">Homepage</a> <br>
+    <a href="/blog/create">create blog</a> <br>
+    <% for (let b in result) {%>
+    <ul><%= result[b].title %>
+        <li><%= result[b].snippet %></li>
+        <li><%= result[b].body %></li>
+        <button class="delete" data-doc="<%= result[b]._id %>">delete</button>
+    </ul>
+    <% } %>
+    <script>
+        const del = document.querySelectorAll(".delete");
+        console.log(del);
+        del.forEach(blog => {
+            blog.addEventListener('click', (e) => {
+            const endpoint = `/blog/${blog.dataset.doc}`;
+
+            fetch(endpoint, {
+                method: 'DELETE'
+            }).then((response) => response.json())
+            .then((data) => window.location.href = data.redirect)
+            .catch((err) => {
+                console.log(err);
+            })
+        })
+        })
+    </script>
+</body>
+</html>
