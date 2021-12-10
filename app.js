@@ -10,7 +10,7 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 //listen on port 3233
-app.listen(process.env.PORT || 3233);
+app.listen(process.env.PORT || 2031);
 
 app.use(cors());
 
