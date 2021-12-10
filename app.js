@@ -1,5 +1,5 @@
 const express = require('express');
-
+const cors = require('cors');
 //create an express app
 const app = express();
 //Routers
@@ -9,8 +9,10 @@ const indexRoutes = require('./routes/indexRoutes');
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-//listen on port 3000
-app.listen(3000);
+//listen on port 3233
+app.listen(process.env.PORT || 3233);
+
+app.use(cors());
 
 //static files
 app.use(express.static('./public/'));
